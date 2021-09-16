@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="10000000" author="asynkov">
+        <createTable tableName="course">
+            <column name="id" type="binary(16)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="10000001" author="asynkov">
+        <createTable tableName="course_attachment">
+            <column name="id" type="binary(16)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="course_id" type="binary(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="student_id" type="binary(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="10000002" author="asynkov">
+        <sql>
+            insert into course (id, name)
+            values (UUID_TO_BIN(UUID()), 'Mathematics');
+
+            insert into course (id, name)
+            values (UUID_TO_BIN(UUID()), 'Physics');
+
+            insert into course (id, name)
+            values (UUID_TO_BIN(UUID()), 'English Language');
+        </sql>
+    </changeSet>
+</databaseChangeLog>
